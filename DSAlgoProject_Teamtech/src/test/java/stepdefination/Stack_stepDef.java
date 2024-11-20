@@ -27,7 +27,7 @@ public class Stack_stepDef {
 
 	@When("User clicks in Operations in Stack Page")
 	public void user_clicks_in_operations_in_stack_page() {
-	    
+	    page.ClickoperationsInstack();
 	   
 	}
 
