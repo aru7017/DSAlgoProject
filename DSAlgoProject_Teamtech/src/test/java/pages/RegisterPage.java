@@ -45,27 +45,23 @@ public void clickOnRegisterbutton() {
 	ldriver.findElement(Rigbutton).click();
 }
 	
-public void clickOnUserName1() {
+public void userNamewithoutsendkeys() {
 	
 	ldriver.findElement(userNM);
 }
 
 
-public void clickOnpassword1() {
+public void passwordwithoutsendkeys() {
 	
 	ldriver.findElement(Pwd);
 }
 
-public void clickOnpasswordconfirmatin1() {
+public void passwordconfirmatinwithoutsendkeys() {
 
 ldriver.findElement(Pwdconfirm);
 }
 
-public void clickOnRegisterbutton1() {
 
-ldriver.findElement(Rigbutton).click();
-}
-	
 	
 	
 	
