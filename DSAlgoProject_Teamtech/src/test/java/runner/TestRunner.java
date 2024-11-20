@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features= "C://Users//aru70//git//DSAlgoProject/DSAlgoProject_Teamtech//src//test//resources//features",
+		features= "C:\\Users\\subha\\git\\DSAlgoProject\\DSAlgoProject_Teamtech\\src\\test\\resources\\features\\login.feature",
 		glue = {"stepdefination"}
 		
 		)
