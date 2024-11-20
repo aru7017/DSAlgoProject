@@ -38,7 +38,6 @@ public class Register_stepDef {
 		driver.close();
 	}
 	
-	
 	@Given("user is on the register page")
 	public void user_is_on_the_register_page() {
 		WebDriverManager.edgedriver().setup();
@@ -48,201 +47,144 @@ public class Register_stepDef {
 	    driver.manage().window().maximize();
 	}
 
-	@When("user enters {string} and {string} and \"\"page")
-	public void user_enters_and_and_page(String string, String string2) {
-	  page.clickOnUserName1();
-	  page.clickOnpassword1();
-	  
+	@When("user enters {string} and {string} and {string} all fields empty")
+	public void user_enters_and_and_all_fields_empty(String string, String string2, String string3) {
+		  page.userNamewithoutsendkeys();
+		  page.passwordwithoutsendkeys();
 	}
 
-	@Then("user navigate to login page successfull")
-	public void user_navigate_to_login_page_successfull() {
-	  page.clickOnpasswordconfirmatin1();
-	  page.clickOnRegisterbutton1();
-	  driver.close();
+	@Then("user navigate to loginpage")
+	public void user_navigate_to_loginpage() {
+		  page.passwordconfirmatinwithoutsendkeys();
+		  page.clickOnRegisterbutton();
+		  driver.close();
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-/*@Given("user is on the register")
-	public void user_is_on_the_register_empty_fields() {
-	  
+	@Given("user is on the registerpage")
+	public void user_is_on_the_registerpage() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+	    page = new RegisterPage(driver);
+	    driver.get("https://dsportalapp.herokuapp.com/register");
+	    driver.manage().window().maximize();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_empty_fields(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_empty_fields() {
-	  
-	}
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_only_username() {
-	  
+	@When("user enters {string} and {string} and {string} only username")
+	public void user_enters_and_and_only_username(String string, String string2, String string3) {
+		   page.clickOnUserName();
+		   page.passwordwithoutsendkeys();
+		   page.clickOnRegisterbutton();
 	}
 
+	@Then("user navigate to login page succesfully")
+	public void user_navigate_to_login_page_succesfully() {
+		   page.clickOnRegisterbutton();
+	}	
 	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_only_username(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_only_username() {
-	  
-	}
-	
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_only_password() {
-	  
+	@Given("user is navigate to register")
+	public void user_is_navigate_to_register() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+	    page = new RegisterPage(driver);
+	    driver.get("https://dsportalapp.herokuapp.com/register");
+	    driver.manage().window().maximize();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_only_password(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_only_password() {
-	  
+	@When("user enters {string} and {string} and {string} only password field")
+	public void user_enters_and_and_only_password_field(String string, String string2, String string3) {
+	  page.userNamewithoutsendkeys();
+	  page.clickOnpassword();
+	  page.passwordconfirmatinwithoutsendkeys();
 	}
 
-	@Given("user is on the register")
-	public void user_is_on_the_register_only_passwordconfirmation() {
-	  
+	@Then("user is on the login page")
+	public void user_is_on_the_login_page() {
+	 page.clickOnRegisterbutton();
+		
+	}
+	
+	@Given("user navigate to register page")
+	public void user_navigate_to_register_page() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+	    page = new RegisterPage(driver);
+	    driver.get("https://dsportalapp.herokuapp.com/register");
+	    driver.manage().window().maximize();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_only_passwordconfirmation(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_only_passwordconfirmation() {
-	  
-	}
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_invalid_username() {
-	  
+	@When("user enters {string} and {string} and {string} only passwordconfirmation field")
+	public void user_enters_and_and_only_passwordconfirmation_field(String string, String string2, String string3) {
+		page.userNamewithoutsendkeys();
+	  page.passwordwithoutsendkeys();
+	  page.clickOnpasswordconfirmatin();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_invalid_username(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_invalid_username() {
-	  
-	}
-	
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_invalid_password() {
-	  
+	@Then("user navigates to login page")
+	public void user_navigates_to_login_page() {
+	   page.clickOnRegisterbutton();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_invalid_password(String username, String password, String passwordconfirmation) {
+	@Given("user is navigating to the register")
+	public void user_is_navigating_to_the_register() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+	    page = new RegisterPage(driver);
+	    driver.get("https://dsportalapp.herokuapp.com/register");
+	    driver.manage().window().maximize();
 		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_invalid_password() {
-	  
-	}
-	
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_invalid_passwordconfirmation() {
-	  
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_invalid_passwordconfirmation(String username, String password, String passwordconfirmation) {
+	@When("user enters {string} and {string} and {string} invalid username")
+	public void user_enters_and_and_invalid_username(String string, String string2, String string3) {
+	    page.clickOnUserName();
+	    page.clickOnpassword();
+	    page.clickOnpasswordconfirmatin();
 		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_invalid_passwordconfirmation() {
-	  
-	}
-	
-	
-	@Given("user is on the register")
-	public void user_is_on_the_register_lessthan_eightcharecters() {
-	  
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_lessthan_eightcharecters(String username, String password, String passwordconfirmation) {
-		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_lessthan_eightcharecters() {
-	  
+	@Then("user navigats to loginpage")
+	public void user_navigats_to_loginpage() {
+	 
+		page.clickOnRegisterbutton();
 	}
 	
-	@Given("user is on the register")
-	public void user_is_on_the_register_morethan_eightcharecters() {
-	  
+	
+	@Given("user is navigating to the register page")
+	public void user_is_navigating_to_the_register_page() {
+		WebDriverManager.edgedriver().setup();
+		WebDriver driver = new EdgeDriver();
+	    page = new RegisterPage(driver);
+	    driver.get("https://dsportalapp.herokuapp.com/register");
+	    driver.manage().window().maximize();
 	}
 
-	
-	@When("^user enters \"(.*)\" and \"(.*)\" and \"(.*)\"$")
-	public void user_enters_and_morethan_eightcharecters(String username, String password, String passwordconfirmation) {
+	@When("user enters {string} and {string} and {string} invalid password")
+	public void user_enters_and_and_invalid_password(String string, String string2, String string3) {
+	    page.clickOnUserName();
+	    page.clickOnpassword();
+	    page.clickOnpasswordconfirmatin();
 		
-		
-		}
-	
-	@Then("user navigate to login page")
-	public void user_navigate_to_login_page_morethan_eightcharecters() {
-	  
-	
-	
+	}
+
+	@Then("user navigating to the loginpage")
+	public void user_navigating_to_the_loginpage() {
+		page.clickOnRegisterbutton();
+	}
 	
 	
 	
 	
-	}*/
 	
 	
 	
+	
+	
+	
+	
+
+	
+
 	
 	
 	
