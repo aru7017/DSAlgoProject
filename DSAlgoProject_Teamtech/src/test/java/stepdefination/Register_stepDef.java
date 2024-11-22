@@ -173,7 +173,24 @@ public class Register_stepDef {
 	}
 	
 	
-	
+
+@Given("user is able to navigates Login Page")
+public void user_is_able_to_navigates_login_page() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@When("user enters {string} and \"Time4team$\"invalid password")
+public void user_enters_and_time4team$_invalid_password(String string) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@Then("user is able navigates to homepage")
+public void user_is_able_navigates_to_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
 	
 	
 	
