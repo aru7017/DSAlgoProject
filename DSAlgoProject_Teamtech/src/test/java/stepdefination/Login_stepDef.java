@@ -1,18 +1,69 @@
 package stepdefination;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-
+import drivermanager.DriverFactory;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import pages.LoginPage;
 
+
 public class Login_stepDef {
-	public WebDriver driver;
-	public LoginPage page ;
-	@Given("user is on the browser")
+	
+	private LoginPage loginpage = new LoginPage(DriverFactory.getDriver()) ;
+	
+
+	@Given("user is on the LoginPage")
+	public void user_is_on_the_login_page() {
+		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com/login");
+		loginpage.enterUserName();
+		loginpage.enterPassword();
+		loginpage.clickLgButton();
+	}
+
+	@When("user enters {string} and {string} valid credentials")
+	public void user_enters_and_valid_credentials(String string, String string2) {
+	   
+	}
+
+	@Then("user navigate to homepage")
+	public void user_navigate_to_homepage() {
+		
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*@Given("user is on the browser")
 	public void user_is_on_the_browser() {
 		WebDriverManager.edgedriver().setup();
 		WebDriver driver = new EdgeDriver();
@@ -34,9 +85,9 @@ public class Login_stepDef {
 		page.clickLgButton();
 		driver.close();
 		
-	}
+	}*/
 	
-	@Given("user is on the LoginPage")
+/*	@Given("user is on the LoginPage")
 	public void user_is_on_the_login_page() {
 		WebDriverManager.edgedriver().setup();
 		WebDriver driver = new EdgeDriver();
@@ -63,9 +114,9 @@ public void user_navigate_the_login_page() {
 	page = new LoginPage(driver);
 	 driver.get("https://dsportalapp.herokuapp.com/login");
 	    driver.manage().window().maximize(); 
-}
+}*/
 
-@When("user enters {string} and {string} password only")
+/*@When("user enters {string} and {string} password only")
 public void user_enters_and_password_only(String string, String string2) {
    page.emptyUserName();
    page.enterPassword();
@@ -136,16 +187,15 @@ public void user_enters_and_invalid_password(String string, String string2) {
 @Then("user is able navigates to homepage successfull")
 public void user_is_able_navigates_to_homepage_successfull() {
 	  page.clickLgButton();
+}*/
+	
+	
+	
+	
+	
+	
+	
+	
 }
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 
-}
