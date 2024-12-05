@@ -6,63 +6,60 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 	
-	public WebDriver ldriver;
+	public WebDriver driver;
 	
 	
-	public LoginPage(WebDriver rdriver ) {
-		
-		ldriver = rdriver	;
-		 PageFactory.initElements(ldriver, this);
-		
-	}
+	
 
 public	By userNM = By.xpath("//*[@id='id_username']");
 public	By Pwd = By.xpath("//*[@id='id_password']");	
 public	By Lgbutton = By.xpath("//*[@type='submit']");	
 	
-	
+public LoginPage(WebDriver driver ) {
+	this.driver = driver;
+	}
 
 
 public void enterUserName() {
 	
-	ldriver.findElement(userNM).sendKeys("techteam");
-	ldriver.findElement(userNM).click();
+	driver.findElement(userNM).sendKeys("techteam");
+	
 }
 
 public void enterPassword() {
 	
-	ldriver.findElement(Pwd).sendKeys("Time4team$");
+	driver.findElement(Pwd).sendKeys("Time4team$");
 	
 }
 
 public void clickLgButton() {
 	
-	ldriver.findElement(Lgbutton).click();
+	driver.findElement(Lgbutton).click();
 	
 }
 
 public void emptyUserName() {
 	
-	ldriver.findElement(userNM);
+	driver.findElement(userNM);
 	
 }
 
 public void emptyPassword() {
 	
-	ldriver.findElement(Pwd);
+	driver.findElement(Pwd);
 	
 }
 
 public void invalidUserName() {
 	
-	ldriver.findElement(Pwd).sendKeys("techteam123");;
+	driver.findElement(Pwd).sendKeys("techteam123");;
 	
 }
 
 
 public void invalidPassword() {
 	
-	ldriver.findElement(Pwd).sendKeys("Time4team$1234");;
+	driver.findElement(Pwd).sendKeys("Time4team$1234");;
 	
 }
 
