@@ -1,22 +1,23 @@
 Feature: DsAlgo login feature
+Scenario Outline: Sign In successful with valid credentials
+    Given user navigates to Home page
+    When user navigates to Login page
+    Then user enters sheet "<Sheetname>" and <RowNumber> with valid credentials
+   
+       Examples: 
+      | Sheetname | RowNumber |
+      | login     |         0 |
+     
 
 
-
-
-  Scenario Outline: Check login is successful with valid credentials
+  Scenario Outline: Check login feature with all empty fields
     Given user is on the LoginPage
-    When user enters "<username>" and "<password>" valid credentials
+    When user enters "<Sheetname>" and <RowNumber> all fields empty
     Then user navigate to homepage
 
-    Examples: 
-     | username | password   |
-     | techteam | Time4team$ |
-
-
-
-
-
-
+   Examples: 
+      | Sheetname | RowNumber   |
+      | login     |            1|
 
 
 

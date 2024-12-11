@@ -7,9 +7,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-		features= "C://Users//aru70//git//DSAlgoProject/DSAlgoProject_Teamtech//src//test//resources//features/login.feature",
+		features= "C://Users//aru70//git//DSAlgoProject/DSAlgoProject_Teamtech//src//test//resources//features//DataStructure.feature",
 		glue = {"stepdefination"},
-		dryRun=false,
+		dryRun=true,
 		plugin= {"pretty","html:test-output"}
 		
 		)

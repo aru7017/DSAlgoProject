@@ -1,8 +1,19 @@
 package pages;
 
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import utilities.ExcelReader;
 
 public class LoginPage {
 	
@@ -11,57 +22,44 @@ public class LoginPage {
 	
 	
 
-public	By userNM = By.xpath("//*[@id='id_username']");
-public	By Pwd = By.xpath("//*[@id='id_password']");	
-public	By Lgbutton = By.xpath("//*[@type='submit']");	
+	public	By userNM = By.xpath("//*[@id='id_username']");
+	public	By Pwd = By.id("id_password");	
+	public	By loginBN = By.xpath("//*[@type='submit']");
+	public	By getStartedBn = By.xpath("//*//*[@class='btn']");
+	public	By signInLink = By.xpath("//*[@id=\"navbarCollapse\"]/div[2]/ul/a[3]");
 	
 public LoginPage(WebDriver driver ) {
 	this.driver = driver;
 	}
 
 
-public void enterUserName() {
-	
-	driver.findElement(userNM).sendKeys("techteam");
-	
-}
-
-public void enterPassword() {
-	
-	driver.findElement(Pwd).sendKeys("Time4team$");
+public void enterDataForLogin(String username, String password) {
+	driver.findElement(userNM).sendKeys(username);
+	driver.findElement(Pwd).sendKeys(password);
 	
 }
 
-public void clickLgButton() {
+public DataStrucuturePage clickLoginBtn() {
+	driver.findElement(loginBN).click();
+	return new DataStrucuturePage(driver);
+}
+
+public void getStartedbn() {
 	
-	driver.findElement(Lgbutton).click();
+	driver.findElement(getStartedBn).click();
 	
 }
 
-public void emptyUserName() {
+public void signIn() {
 	
-	driver.findElement(userNM);
-	
-}
-
-public void emptyPassword() {
-	
-	driver.findElement(Pwd);
-	
-}
-
-public void invalidUserName() {
-	
-	driver.findElement(Pwd).sendKeys("techteam123");;
+	driver.findElement(signInLink).click();
 	
 }
 
 
-public void invalidPassword() {
-	
-	driver.findElement(Pwd).sendKeys("Time4team$1234");;
-	
-}
+
+
+
 
 
 
