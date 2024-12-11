@@ -1,34 +1,75 @@
 package stepdefination;
 
+import java.io.IOException;
+import java.util.Map;
+import java.util.List;
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
+
+import org.openqa.selenium.WebDriver;
+
 import drivermanager.DriverFactory;
+import io.cucumber.core.internal.com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pages.CommonPage;
 import pages.LoginPage;
+import utilities.ExcelReader;
 
 
 public class Login_stepDef {
 	
-	private LoginPage loginpage = new LoginPage(DriverFactory.getDriver()) ;
 	
+	
+private LoginPage login = new LoginPage(DriverFactory.getDriver());
 
-	@Given("user is on the LoginPage")
-	public void user_is_on_the_login_page() {
-		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com/login");
-		loginpage.enterUserName();
-		loginpage.enterPassword();
-		loginpage.clickLgButton();
+	
+	
+	private WebDriver driver;
+	
+	@Given("user navigates to Home page")
+	public void user_navigates_to_home_page() {
+		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
+	
 	}
 
-	@When("user enters {string} and {string} valid credentials")
-	public void user_enters_and_valid_credentials(String string, String string2) {
+	@When("user navigates to Login page")
+	public void user_navigates_to_login_page() {
 	   
 	}
+	@Then("user enters sheet {string} and {int} with valid credentials")
+	public void user_enters_sheet_and_with_valid_credentials(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException {
+		login.getStartedbn();
+		login.signIn();
+		ExcelReader reader = new ExcelReader();
+		List<Map<String,String>>testData=reader.getData("src\\\\test\\resources\\ExcelTestData\\\\LoginData.xlsx", Sheetname);
+		 
+	       String Urm =	testData.get(rownumber).get("username").trim();
+	       System.out.println(Urm);
+	       String Pwd =	testData.get(rownumber).get("password").trim();
+	       System.out.println(Pwd);
+	       login.enterDataForLogin(Urm, Pwd);
+	       login.clickLoginBtn();
+	}
 
-	@Then("user navigate to homepage")
-	public void user_navigate_to_homepage() {
-		
-	}	
+
+@Given("user is on the LoginPage")
+public void user_is_on_the_login_page() {
+	DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com/login");
+}
+
+@When("user enters {string} and {int} all fields empty")
+public void user_enters_and_all_fields_empty(String string, Integer int1) {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
+@Then("user navigate to homepage")
+public void user_navigate_to_homepage() {
+    // Write code here that turns the phrase above into concrete actions
+    throw new io.cucumber.java.PendingException();
+}
+
 	
 	
 	
