@@ -49,6 +49,11 @@ public StackPage clickLoginBtn1() {
 	return new StackPage(driver);
 }
 
+public QueuePage clickLoginBtn2() {
+	driver.findElement(loginBN).click();
+	return new QueuePage(driver);
+}
+
 
 public void getStartedbn() {
 	
