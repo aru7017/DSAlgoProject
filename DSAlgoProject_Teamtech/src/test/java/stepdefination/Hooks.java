@@ -37,6 +37,9 @@ public class Hooks {
    String browserName	= prop.getProperty("browser")	;
    driverFactory = new DriverFactory();
    driver = driverFactory.initializeDriver(browserName);
+   //To load the page
+   DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
+   DriverFactory.getDriver().manage().window().maximize();
 	}
 	
 	@After(order = 0)
