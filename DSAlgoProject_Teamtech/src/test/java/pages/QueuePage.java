@@ -16,17 +16,44 @@ public class QueuePage {
 	public	By texteditor = By.xpath("//div[contains(@class,'CodeMirror')]/div/textarea");
 	public By runbutton = By.xpath("//button[text()='Run']");
 	public By output = By.id("output");
+	public By implementationUsingCollectionDequeue=By.xpath("(//a[@class='list-group-item'])[2]");
+	public By implementationUsingArray=By.xpath("(//a[@class='list-group-item'])[3]");
+	public By queueOperations=By.xpath("(//a[@class='list-group-item'])[4]");
+	public By practiceQuestions=By.xpath("//a[@href=\"/queue/practice\"]");
 	
 	public void queueGetStartedBtn() {
 		
 		driver.findElement(queueGetStartedBtn).click();
 		
 	}
-    public void implementationOfQueueLink() {
+	
+	public void getOutputResult() {
+		
+		driver.findElement(output).getText();
+		
+	}
+    public void implementationUsingArrayLink() {
+		
+		driver.findElement(implementationUsingArray).click();
+		
+	}
+    
+    public void queueOperationsLink() {
+		
+  		driver.findElement(queueOperations).click();
+  		
+  	}
+    
+ public void implementationOfQueueLink() {
 		
 		driver.findElement(implementationOfQueue).click();
 		
 	}
+
+    
+    public void implementationUsingCollectionDequeue() {
+    	driver.findElement(implementationUsingCollectionDequeue).click();
+    }
     
 	public void ClickTryHereInQueue () {
 		driver.findElement(tryHere).click();
@@ -41,5 +68,11 @@ public class QueuePage {
 	
 	public void TextEditorInvalidOperations () {
 		driver.findElement(texteditor).sendKeys("Hello");
+	}
+	
+	public void PracticeQuestionsLink() {
+		
+		driver.findElement(practiceQuestions).click();
+		
 	}
 }
