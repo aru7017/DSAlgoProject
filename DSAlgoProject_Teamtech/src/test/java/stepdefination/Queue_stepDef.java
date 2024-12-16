@@ -1,5 +1,8 @@
 package stepdefination;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
@@ -9,6 +12,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pages.LoginPage;
 import pages.QueuePage;
+import utilities.ConfigReader;
 
 
 public class Queue_stepDef {
@@ -16,7 +20,8 @@ public class Queue_stepDef {
 	private WebDriver driver;
 	private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	private QueuePage queue = new QueuePage(driver);
-	
+	Properties prop;
+	private ConfigReader configReader=new ConfigReader();
 	@Given("User navigates to login page")
 	public void user_navigates_to_login_page() {
 		 login.getStartedbn();
@@ -24,8 +29,16 @@ public class Queue_stepDef {
 	}
 
 	@When("User enters username and password and clicks on login button")
-	public void user_enters_username_and_password_and_clicks_on_login_button() {
-		login.enterDataForLogin("techteam", "Time4team$"); 
+	public void user_enters_username_and_password_and_clicks_on_login_button() throws IOException {
+		configReader = new ConfigReader();
+	    prop =configReader.initializeProp();
+
+		String userName = prop.getProperty("username");
+		   String PassWord = prop.getProperty("password");
+		login.enterDataForLogin(userName, PassWord); 
+		
+		
+		//login.enterDataForLogin("techteam","Time4team$" ); 
 		queue=login.clickLoginBtn2();
 	}
 
