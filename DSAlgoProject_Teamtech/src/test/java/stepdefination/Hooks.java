@@ -34,11 +34,15 @@ public class Hooks {
 	
 	@Before(order = 1)
 	public void launchBrowser() {
-   String browserName	= prop.getProperty("browser")	;
+   String browserName	= prop.getProperty("browser");
+   String portalUrl = prop.getProperty("url");
+  // String userName = prop.getProperty("username");
+   //String PassWord = prop.getProperty("password");
    driverFactory = new DriverFactory();
    driver = driverFactory.initializeDriver(browserName);
+   driver.get(portalUrl);
    //To load the page
-   DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
+  // DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
    DriverFactory.getDriver().manage().window().maximize();
 	}
 	
