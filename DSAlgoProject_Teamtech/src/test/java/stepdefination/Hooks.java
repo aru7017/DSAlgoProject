@@ -40,7 +40,8 @@ public class Hooks {
    driver = driverFactory.initializeDriver(browserName);
    driver.get(portalUrl); 
    DriverFactory.getDriver().manage().window().maximize();
-   
+
+ 
 	}
 	
 	@After(order = 0)
