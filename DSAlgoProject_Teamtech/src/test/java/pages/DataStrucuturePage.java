@@ -14,7 +14,8 @@ public class DataStrucuturePage {
 	public	By getStartedBtn = By.xpath("//a[@href='data-structures-introduction']");
 	public	By timeComplexity = By.xpath("//a[@href='time-complexity']");
 	public	By tryHere = By.linkText("Try here>>>");
-	public	By testeditor = By.xpath("//*[@id=\"answer_form\"]/div/div/div[6]/div[1]/div/div/div/div[5]/div/pre");
+	public	By testeditor = By.xpath("//div[contains(@class,'CodeMirror')]/div/textarea");
+	
 	public DataStrucuturePage(WebDriver driver ) {
 		this.driver = driver;
 		}
@@ -40,10 +41,19 @@ public class DataStrucuturePage {
 	}
 	
 	public void testEditor() {
-		Actions action = new Actions(driver);
-		action.moveToElement((WebElement) testeditor).click().build().perform();
+		
+/*Actions action = new Actions(driver);
+		 action.sendKeys(driver.findElement(testeditor),Keys.ENTER)
+		 .build()
+		 .perform();
+		 action.sendKeys("print('Hello, world!') ");
 	
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+		 * 
+		 * 
+		 * 
+	}*/
+		driver.findElement(testeditor).sendKeys("hello world");
+		
 	}
-	
 }

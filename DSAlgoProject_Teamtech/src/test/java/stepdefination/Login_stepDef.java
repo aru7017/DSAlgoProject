@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
-
+import org.apache.poi.ss.usermodel.Cell;
 import org.openqa.selenium.WebDriver;
 
 import drivermanager.DriverFactory;
@@ -27,7 +27,64 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	
 	private WebDriver driver;
 	
-	@Given("user navigates to Home page")
+	@Given("user is on the LoginPage")
+	public void user_is_on_the_login_page() {
+		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
+	}
+
+	@When("user enters {string} and {int}")
+	public void user_enters_and(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
+		login.getStartedbn();
+		login.signIn();
+		ExcelReader reader = new ExcelReader();
+		
+		List<Map<String,String>>testData=reader.getData("src\\test\\resources\\ExcelTestData\\LoginData.xlsx", Sheetname);
+		 
+	       String Urm =	testData.get(rownumber).get("username");
+	       System.out.println(Urm);
+	       String Pwd =	testData.get(rownumber).get("password");
+	       System.out.println(Pwd);
+	       login.enterDataForLogin(Urm, Pwd);
+	        
+	}
+
+	@Then("user enters valid credentials")
+	public void user_enters_valid_credentials() {
+		login.clickLoginBtn();
+	}
+	
+	@Then("user enters invalid credentials")
+	public void user_enters_invalid_credentials() {
+		login.clickLoginBtn();
+	}
+	
+	@Then("user enters only password field")
+	public void user_enters_only_password_field() {
+		login.clickLoginBtn();
+	}
+	@Then("user enters only username field")
+	public void user_enters_only_username_field() {
+		login.clickLoginBtn();
+	}
+	@Then("user checks all empty fields")
+	public void user_checks_all_empty_fields() {
+		login.clickLoginBtn();
+	}
+	
+	@Then("user enters alphanumaric charecters for password")
+	public void user_enters_alphanumaric_charecters_for_password() {
+		login.clickLoginBtn();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	@Given("user navigates to Home page")
 	public void user_navigates_to_home_page() {
 		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
 	
@@ -35,10 +92,10 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 
 	@When("user navigates to Login page")
 	public void user_navigates_to_login_page() {
-	   
+
 	}
 	@Then("user enters sheet {string} and {int} with valid credentials")
-	public void user_enters_sheet_and_with_valid_credentials(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException {
+	public void user_enters_sheet_and_with_valid_credentials(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
 		login.getStartedbn();
 		login.signIn();
 		ExcelReader reader = new ExcelReader();
@@ -50,25 +107,10 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	       System.out.println(Pwd);
 	       login.enterDataForLogin(Urm, Pwd);
 	       login.clickLoginBtn();
-	}
+	}*/
 
 
-@Given("user is on the LoginPage")
-public void user_is_on_the_login_page() {
-	DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com/login");
-}
 
-@When("user enters {string} and {int} all fields empty")
-public void user_enters_and_all_fields_empty(String string, Integer int1) {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
-
-@Then("user navigate to homepage")
-public void user_navigate_to_homepage() {
-    // Write code here that turns the phrase above into concrete actions
-    throw new io.cucumber.java.PendingException();
-}
 
 	
 	
