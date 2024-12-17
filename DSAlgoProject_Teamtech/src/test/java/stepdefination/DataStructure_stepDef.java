@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.poi.openxml4j.exceptions.OpenXML4JException;
 import org.openqa.selenium.WebDriver;
 
 import drivermanager.DriverFactory;
@@ -26,12 +27,12 @@ public class DataStructure_stepDef {
 	}
 	
 	@When("user enters sheet {string} and {int} valid Python Code")
-	public void user_enters_sheet_and_valid_python_code_(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException {
+	public void user_enters_sheet_and_valid_python_code_(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
 		 
 		login.getStartedbn();
 		login.signIn();
 		ExcelReader reader = new ExcelReader();
-		List<Map<String,String>>testData=reader.getData("src\\\\test\\resources\\ExcelTestData\\\\LoginData.xlsx", Sheetname);
+		List<Map<String,String>>testData=reader.getData("src\\test\\resources\\ExcelTestData\\LoginData.xlsx", Sheetname);
 		 
 	       String Urm =	testData.get(rownumber).get("username").trim();
 	       System.out.println(Urm);
@@ -52,7 +53,7 @@ public class DataStructure_stepDef {
 	
 	
 	@When("user enters sheet {string} and {int}")
-	public void user_enters_sheet_and(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException {
+	public void user_enters_sheet_and(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
 		login.getStartedbn();
 		login.signIn();
 		ExcelReader reader = new ExcelReader();
@@ -73,7 +74,7 @@ public class DataStructure_stepDef {
 	}
 	
     @When("user enters sheet {string} and {int} Tryhere button")
-	 public void user_enters_sheet_and_tryhere_button(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException {
+	 public void user_enters_sheet_and_tryhere_button(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
 		login.getStartedbn();
 		login.signIn();
 		ExcelReader reader = new ExcelReader();
@@ -95,13 +96,26 @@ public class DataStructure_stepDef {
 	}
 	
 	@When("user enters sheet {string} and {int} Try Editor field")
-	public void user_enters_sheet_and_try_editor_field(String string, Integer int1) {
-	
+	public void user_enters_sheet_and_try_editor_field(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
+		login.getStartedbn();
+		login.signIn();
+		ExcelReader reader = new ExcelReader();
+		List<Map<String,String>>testData=reader.getData("src\\\\test\\resources\\ExcelTestData\\\\LoginData.xlsx", Sheetname);
+		 
+	       String Urm =	testData.get(rownumber).get("username").trim();
+	       System.out.println(Urm);
+	       String Pwd =	testData.get(rownumber).get("password").trim();
+	       System.out.println(Pwd);
+	       login.enterDataForLogin(Urm, Pwd);
+	       datastructure=login.clickLoginBtn();
+	       datastructure.getStartedbtn();
+	       datastructure.timeComplexity();
+	       datastructure.tryHereBtn();
 	}
 
 	@Then("user navigates to Try Editor field")
 	public void user_navigates_to_try_editor_field() {
-	   
+		datastructure.testEditor();
 	}
 	
 	
