@@ -44,6 +44,17 @@ public DataStrucuturePage clickLoginBtn() {
 	return new DataStrucuturePage(driver);
 }
 
+public StackPage clickLoginBtn1() {
+	driver.findElement(loginBN).click();
+	return new StackPage(driver);
+}
+
+public QueuePage clickLoginBtn2() {
+	driver.findElement(loginBN).click();
+	return new QueuePage(driver);
+}
+
+
 public void getStartedbn() {
 	
 	driver.findElement(getStartedBn).click();

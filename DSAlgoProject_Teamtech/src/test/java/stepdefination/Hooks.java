@@ -34,16 +34,20 @@ public class Hooks {
 	
 	@Before(order = 1)
 	public void launchBrowser() {
-   String browserName	= prop.getProperty("browser")	;
+   String browserName	= prop.getProperty("browser");
+   String portalUrl = prop.getProperty("url");
    driverFactory = new DriverFactory();
    driver = driverFactory.initializeDriver(browserName);
+   driver.get(portalUrl); 
+   DriverFactory.getDriver().manage().window().maximize();
+   
 	}
 	
 	@After(order = 0)
 	public void quitBroweser() {
 		if (driver != null) {
 			
-			//driver.quit();
+		//	driver.quit();
 		}
 		
 		}

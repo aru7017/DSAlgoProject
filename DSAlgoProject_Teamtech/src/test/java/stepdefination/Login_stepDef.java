@@ -29,7 +29,7 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	
 	@Given("user is on the LoginPage")
 	public void user_is_on_the_login_page() {
-		DriverFactory.getDriver().get("https://dsportalapp.herokuapp.com"); 
+	 
 	}
 
 	@When("user enters {string} and {int}")
