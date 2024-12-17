@@ -20,7 +20,9 @@ public class StackPage {
 	public	By texteditor = By.xpath("//div[contains(@class,'CodeMirror')]/div/textarea");
 	public By runbutton = By.xpath("//button[text()='Run']");
 	public By output = By.id("output");
-	
+	public By implementationInStack = By.xpath("//a[@href=\"implementation\"]");
+	public By applicationsInStack = By.xpath("//a[@href=\"stack-applications\"]");
+	public By practiceQuestions=By.xpath("//a[@href=\"/stack/practice\"]");
 	
 	public void stackgetStartedbtn() {
 		System.out.println("CurrentURl"+driver.getCurrentUrl());
@@ -30,6 +32,14 @@ public class StackPage {
 	
 	public void ClickoperationsInstack () {
 		driver.findElement(operationsInstack).click();
+	}
+	
+	public void ClickImplementationInstack () {
+		driver.findElement(implementationInStack).click();
+	}
+	
+	public void ClickApplicationsInstack () {
+		driver.findElement(applicationsInStack).click();
 	}
 	
 	public void ClickTryHereInstack () {
@@ -45,6 +55,12 @@ public class StackPage {
 	
 	public void TextEditorInvalidOperations () {
 		driver.findElement(texteditor).sendKeys("Hello");
+	}
+	
+   public void PracticeQuestionsLink() {
+		
+		driver.findElement(practiceQuestions).click();
+		
 	}
 }
 	
