@@ -1,80 +1,80 @@
-//package stepdefination;
-//
-//import java.io.IOException;
-//import java.util.Properties;
-//import java.util.concurrent.locks.Lock;
-//import java.util.concurrent.locks.ReentrantLock;
-//
-//import org.openqa.selenium.By;
-//import org.openqa.selenium.WebDriver;
-//
+package stepdefination;
+
+import java.io.IOException;
+import java.util.Properties;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+
+import drivermanager.DriverFactory;
 //import drivermanager.DriverFactory;
-////import drivermanager.DriverFactory;
-//import io.cucumber.java.After;
-//import io.cucumber.java.Before;
-//import io.cucumber.java.Scenario;
-//import io.cucumber.messages.types.Duration;
-//import utilities.ConfigReader;
-//
-//public class Hooks {
-//
-//	private DriverFactory driverFactory;
-//	private WebDriver driver;
-//	private ConfigReader configReader;
-//	Properties prop;
-//	
-//	@Before(order = 0)
-//	public void setupbrowser() throws IOException {
-//		
-//		configReader = new ConfigReader();
-//	    prop =configReader.initializeProp();
-//		
-//		
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import io.cucumber.messages.types.Duration;
+import utilities.ConfigReader;
+
+public class Hooks {
+
+	private WebDriver driver;
+	public Properties configProp;
+	private DriverFactory driverFactory = new DriverFactory();
+	private static final Lock lock = new ReentrantLock();
+	
+	@Before(order = 0)
+	public void setUp() throws IOException {
+		// to ensure that WebDriver initialization is thread-safe.
+		lock.lock();
+		configProp = ConfigReader.initializeProp();
+		driver = driverFactory.getDriver();
+		lock.unlock();
+		driver.manage().window().maximize();
+		driver.get(configProp.getProperty("url"));
+		System.out.println("URL :>>>"+configProp.getProperty("url"));
+		driver.findElement(By.xpath("//button[text()='Get Started']")).click();
+	//	driver.get(configProp.getProperty("username"));
+	//	driver.get(configProp.getProperty("password"));
+	}
+//	@After(order = 1)
+//	public void takeScreenshotOnFailure(Scenario scenario) {
+	//	if (scenario.isFailed()) {
+		//	TakesScreenshot ts = (TakesScreenshot) driver;
+	//		byte[] src = ts.getScreenshotAs(OutputType.BYTES);
+		//	scenario.attach(src, "image/png", "screenshot");
+	//	}
 //	}
-//	
-//	@Before(order = 1)
-//	public void launchBrowser() {
-//   String browserName	= prop.getProperty("browser");
-//   String portalUrl = prop.getProperty("url");
-//   driverFactory = new DriverFactory();
-//   driver = driverFactory.initializeDriver(browserName);
-//   driver.get(portalUrl); 
-//   DriverFactory.getDriver().manage().window().maximize();
-//
-// 
-//	}
-//	
-//	@After(order = 0)
-//	public void quitBroweser() {
-//		if (driver != null) {
-//			
-//		//	driver.quit();
-//		}
-//		
-//		}
-//		//System.out.println("Closing browser for -" + Thread.currentThread().theadID());
-//		@After(order = 1)
-//		public void tearDown(Scenario sc) {
-//			if(sc.isFailed()) {
-//				
-//				
-//			}
-//			
-//		
-//
-//	}
-//}
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//	
-//
+	@After(order = 0)
+	public void tearDown() {
+		if (driver != null) {
+			driverFactory.removeDriver();
+			//driver.quit();
+		}
+		
+	}
+
+
+
+
+
+
+
+
+
+
+}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
