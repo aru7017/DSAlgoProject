@@ -25,7 +25,7 @@ public class Hooks {
 	private DriverFactory driverFactory = new DriverFactory();
 	private static final Lock lock = new ReentrantLock();
 	
-	@Before(order = 0)
+	@Before(order = 0) 
 	public void setUp() throws IOException {
 		// to ensure that WebDriver initialization is thread-safe.
 		lock.lock();
