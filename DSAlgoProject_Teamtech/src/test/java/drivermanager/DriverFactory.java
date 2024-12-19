@@ -35,7 +35,7 @@ public class DriverFactory {
             if (browser == null) {
                 browser = "chrome";
             }
-            switch (browser.toLowerCase()) {
+            switch (browser.toLowerCase()) {  
                 case "firefox":
                     FirefoxOptions firefoxOptions = new FirefoxOptions();
                     return new FirefoxDriver(firefoxOptions);

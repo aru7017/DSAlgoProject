@@ -32,7 +32,7 @@ public class LoginPage {
 		this.driver = driver;
 		//PageFactory.initElements(driver, this);
 	}
-
+	
 
 public void enterDataForLogin(String username, String password) {
 	driver.findElement(userNM).sendKeys(username);
@@ -40,17 +40,18 @@ public void enterDataForLogin(String username, String password) {
 	
 }
 
+
+
 public void clickLoginBtn() {
 	driver.findElement(loginBN).click();
 	
 }
 
-
-
-public QueuePage clickLoginBtn2() {
-	driver.findElement(loginBN).click();
-	return new QueuePage(driver);
+public DataStrucuturePage signIn() {
+	driver.findElement(signInLink).click();
+	return new DataStrucuturePage(driver);
 }
+
 
 
 public void getStartedbn() {
@@ -59,11 +60,7 @@ public void getStartedbn() {
 	
 }
 
-public DataStrucuturePage signIn() {
-	
-	driver.findElement(signInLink).click();
-	return new DataStrucuturePage(driver);
-}
+
 
 
 
