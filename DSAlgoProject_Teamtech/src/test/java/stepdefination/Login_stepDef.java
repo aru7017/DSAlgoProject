@@ -21,31 +21,26 @@ public class Login_stepDef {
 	
 	
 	
-private LoginPage login = new LoginPage(DriverFactory.getDriver());
 
+
+LoginPage login;
+private DriverFactory driverFactory = new DriverFactory();
+private WebDriver driver;
 	
 	
-	private WebDriver driver;
 	
 	@Given("user is on the LoginPage")
 	public void user_is_on_the_login_page() {
-	 
+		driver = driverFactory.getDriver();
+		login = new LoginPage(driver);
+		login.signIn();
 	}
 
 	@When("user enters {string} and {int}")
 	public void user_enters_and(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
-		login.getStartedbn();
-		login.signIn();
-		ExcelReader reader = new ExcelReader();
 		
-		List<Map<String,String>>testData=reader.getData("src\\test\\resources\\ExcelTestData\\LoginData.xlsx", Sheetname);
-		 
-	       String Urm =	testData.get(rownumber).get("username");
-	       System.out.println(Urm);
-	       String Pwd =	testData.get(rownumber).get("password");
-	       System.out.println(Pwd);
-	       login.enterDataForLogin(Urm, Pwd);
-	        
+		login.enterExcelDataForLogin(Sheetname, rownumber);
+		   
 	}
 
 	@Then("user enters valid credentials")
@@ -53,7 +48,7 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 		login.clickLoginBtn();
 	}
 	
-	@Then("user enters invalid credentials")
+/*	@Then("user enters invalid credentials")
 	public void user_enters_invalid_credentials() {
 		login.clickLoginBtn();
 	}
@@ -74,7 +69,7 @@ private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	@Then("user enters alphanumaric charecters for password")
 	public void user_enters_alphanumaric_charecters_for_password() {
 		login.clickLoginBtn();
-	}
+	}*/
 	
 	
 	

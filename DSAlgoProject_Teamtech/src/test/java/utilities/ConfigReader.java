@@ -8,20 +8,27 @@ import java.util.Properties;
 public class ConfigReader {
  
 	
-	private Properties prop;
+	static Properties prop;
 	
 	
-	public Properties initializeProp() throws IOException {
+	public static Properties initializeProp() throws IOException {
 		
-		prop = new Properties();
 		try {
-			FileInputStream inputProp = new FileInputStream(".\\src\\test\\resources\\config\\config.properties");
-			prop.load(inputProp);
-		} catch (FileNotFoundException e) {
+			prop= new Properties();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		try {
+			FileInputStream inputProp = new FileInputStream("src/test/resources/config/config.properties");
+			prop.load(inputProp);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return prop;
 	}
 	

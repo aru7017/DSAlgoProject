@@ -19,14 +19,47 @@ import utilities.ConfigReader;
 import utilities.ExcelReader;
 
 public class DataStructure_stepDef {
+	private DriverFactory driverFactory = new DriverFactory();
 	private WebDriver driver;
-	private LoginPage login = new LoginPage(DriverFactory.getDriver());
-	private DataStrucuturePage datastructure = new DataStrucuturePage(driver);
-	Properties prop;
-	private ConfigReader configReader=new ConfigReader();
+	LoginPage login;
 	
 	
-	@Given("User navigates login page successfully")
+	@Given("user navigates to Home page")
+	public void user_navigates_to_home_page() {
+
+	}
+
+	@When("user enters sheet {string} and {int}")
+	public void user_enters_sheet_and(String Sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
+		login.getStartedbn();
+		login.signIn();
+		ExcelReader reader = new ExcelReader();
+		
+		List<Map<String,String>>testData=reader.getData("src\\test\\resources\\ExcelTestData\\LoginData.xlsx", Sheetname);
+		 
+	       String Urm =	testData.get(rownumber).get("username");
+	       System.out.println(Urm);
+	       String Pwd =	testData.get(rownumber).get("password");
+	       System.out.println(Pwd);
+	       login.enterDataForLogin(Urm, Pwd); 
+	    //   datastructure=login.clickLoginBtn();
+	}
+	
+	@Then("user navigates to Data Structures-Introduction page")
+	public void user_navigates_to_data_structures_introduction_page() {
+		
+	//	datastructure.getStartedbtn(); 
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/*	@Given("User navigates login page successfully")
 	public void user_navigates_login_page_successfully() {
 		 login.getStartedbn();
 		 login.signIn();
@@ -69,7 +102,7 @@ public class DataStructure_stepDef {
 	public void user_is_able_to_clicks_on_tryhere_button() {
 		datastructure.timeComplexity();
 		datastructure.tryHereBtn();
-	}
+	}*/
 	
 	
 
