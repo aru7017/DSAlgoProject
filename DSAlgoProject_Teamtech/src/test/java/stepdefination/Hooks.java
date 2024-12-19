@@ -31,7 +31,7 @@ public class Hooks {
 		lock.lock();
 
 		configProp = ConfigReader.initializeProp();
-		driver = driverFactory.getDriver();  
+		driver = driverFactory.getDriver();   
 		lock.unlock(); 
 		driver.manage().window().maximize();
 		driver.get(configProp.getProperty("url")); 
