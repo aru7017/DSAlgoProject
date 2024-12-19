@@ -22,7 +22,7 @@ public class LoginPage {
 	
 	
 
-	public	By userNM = By.xpath("//*[@id='id_username']");
+	public	By userNM = By.id("id_username");
 	public	By Pwd = By.id("id_password");	
 	public	By loginBN = By.xpath("//*[@type='submit']");
 	public	By getStartedBn = By.xpath("//*//*[@class='btn']");

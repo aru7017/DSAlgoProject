@@ -13,8 +13,9 @@ public class DataStrucuturePage {
 	
 	public	By getStartedBtn = By.xpath("//a[@href='data-structures-introduction']");
 	public	By timeComplexity = By.xpath("//a[@href='time-complexity']");
-	public	By tryHere = By.linkText("Try here>>>");
-	public	By testeditor = By.xpath("//*[@id=\"answer_form\"]/div/div/div[6]/div[1]/div/div/div/div[5]/div/pre");
+	public	By tryHere = By.xpath("//a[@href='/tryEditor']");
+	public	By testeditor1 = By.xpath("//div[contains(@class,'CodeMirror')]/div/textarea");
+	public	By testeditor2 = By.xpath("//*[@id=\"answer_form\"]/div/div/div[6]/div[1]/div/div/div/div[5]/div[2]/pre");
 	public DataStrucuturePage(WebDriver driver ) {
 		this.driver = driver;
 		}
@@ -39,11 +40,20 @@ public class DataStrucuturePage {
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
 	}
 	
-	public void testEditor() {
-		Actions action = new Actions(driver);
-		action.moveToElement((WebElement) testeditor).click().build().perform();
+	public void testEditor(String validpython ,String invalidpython) {
+		
+/*Actions action = new Actions(driver);
+		 action.sendKeys(driver.findElement(testeditor),Keys.ENTER)
+		 .build()
+		 .perform();
+		 action.sendKeys("print('Hello, world!') ");
 	
 		//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(timeout));
+		 * 
+		 * 
+		 * 
+	}*/
+		driver.findElement(testeditor1).sendKeys(validpython);
+		driver.findElement(testeditor2).sendKeys(validpython);
 	}
-	
 }

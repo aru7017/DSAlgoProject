@@ -28,140 +28,67 @@ import io.cucumber.core.internal.com.fasterxml.jackson.databind.exc.InvalidForma
 
 
 public class ExcelReader {
+	public static int totalRow;
 
+	//to ensure that only one thread can access the workbook at a time
+	private static final ReentrantLock lock = new ReentrantLock();
 
 	public List<Map<String, String>> getData(String excelFilePath, String sheetName)
-			throws InvalidFormatException, IOException {
-		Sheet sheet = getSheetByName(excelFilePath, sheetName);
-		return readSheet(sheet);
-	}
+			throws InvalidFormatException, IOException, OpenXML4JException {
 
-	public List<Map<String, String>> getData(String excelFilePath, int sheetNumber)
-			throws InvalidFormatException, IOException {
-		Sheet sheet = getSheetByIndex(excelFilePath, sheetNumber);
-		return readSheet(sheet);
-	}
-
-	private Sheet getSheetByName(String excelFilePath, String sheetName) throws IOException, InvalidFormatException {
-		Sheet sheet = getWorkBook(excelFilePath).getSheet(sheetName);
-		return sheet;
-	}
-
-	private Sheet getSheetByIndex(String excelFilePath, int sheetNumber) throws IOException, InvalidFormatException {
-		Sheet sheet = getWorkBook(excelFilePath).getSheetAt(sheetNumber);
-		return sheet;
-	}
-
-	private Workbook getWorkBook(String excelFilePath) throws IOException, InvalidFormatException {
-		return WorkbookFactory.create(new File(excelFilePath));
+		lock.lock();
+		try (OPCPackage pkg = OPCPackage.open(new File(excelFilePath))) {
+			Workbook workbook = new XSSFWorkbook(pkg);
+			Sheet sheet = workbook.getSheet(sheetName);
+			return readSheet(sheet);
+		} finally {
+			lock.unlock();
+		}
 	}
 
 	private List<Map<String, String>> readSheet(Sheet sheet) {
+
 		Row row;
-		int totalRow = sheet.getPhysicalNumberOfRows();
+		Cell cell;
+
+		totalRow = sheet.getLastRowNum();
+
 		List<Map<String, String>> excelRows = new ArrayList<Map<String, String>>();
-		int headerRowNumber = getHeaderRowNumber(sheet);
-		if (headerRowNumber != -1) {
-			int totalColumn = sheet.getRow(headerRowNumber).getLastCellNum();
-			int setCurrentRow = 1;
-			for (int currentRow = setCurrentRow; currentRow <= totalRow; currentRow++) {
-				row = getRow(sheet, sheet.getFirstRowNum() + currentRow);
-				LinkedHashMap<String, String> columnMapdata = new LinkedHashMap<String, String>();
-				for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {
-					columnMapdata.putAll(getCellValue(sheet, row, currentColumn));
-				}
-				excelRows.add(columnMapdata);
+
+		for (int currentRow = 1; currentRow <= totalRow; currentRow++) {
+
+			row = sheet.getRow(currentRow);
+			int totalColumn = row.getLastCellNum();
+
+			LinkedHashMap<String, String> columnMapdata = new LinkedHashMap<String, String>();
+
+			String data = null;
+
+			for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {
+
+				cell = row.getCell(currentColumn);
+
+				String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn)
+						.getStringCellValue();
+
+				if (cell.getCellType() == CellType.STRING)
+					data = cell.getStringCellValue();
+				else if (cell.getCellType() == CellType.NUMERIC)
+					data = String.valueOf(cell.getNumericCellValue());
+				else if (cell.getCellType() == CellType.BLANK)
+					data = String.valueOf(cell.getDateCellValue());
+				columnMapdata.put(columnHeaderName, data);
 			}
+
+			excelRows.add(columnMapdata);
 		}
+
 		return excelRows;
 	}
 
-	private int getHeaderRowNumber(Sheet sheet) {
-		Row row;
-		int totalRow = sheet.getLastRowNum();
-		for (int currentRow = 0; currentRow <= totalRow + 1; currentRow++) {
-			row = getRow(sheet, currentRow);
-			if (row != null) {
-				int totalColumn = row.getLastCellNum();
-				for (int currentColumn = 0; currentColumn < totalColumn; currentColumn++) {
-					Cell cell;
-					cell = row.getCell(currentColumn, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-					if (cell.getCellType() == CellType.STRING) {
-						return row.getRowNum();
+	public int countRow() {
 
-					} else if (cell.getCellType() == CellType.NUMERIC) {
-						return row.getRowNum();
-
-					} else if (cell.getCellType() == CellType.BOOLEAN) {
-						return row.getRowNum();
-					} else if (cell.getCellType() == CellType.ERROR) {
-						return row.getRowNum();
-					}
-				}
-			}
-		}
-		return (-1);
-	}
-
-	private Row getRow(Sheet sheet, int rowNumber) {
-		return sheet.getRow(rowNumber);
-	}
-
-	private LinkedHashMap<String, String> getCellValue(Sheet sheet, Row row, int currentColumn) {
-		LinkedHashMap<String, String> columnMapdata = new LinkedHashMap<String, String>();
-		Cell cell;
-		if (row == null) {
-			if (sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-					.getCellType() != CellType.BLANK) {
-				String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(currentColumn)
-						.getStringCellValue();
-				columnMapdata.put(columnHeaderName, "");
-			}
-		} else {
-			cell = row.getCell(currentColumn, Row.MissingCellPolicy.CREATE_NULL_AS_BLANK);
-			if (cell.getCellType() == CellType.STRING) {
-				if (sheet.getRow(sheet.getFirstRowNum())
-						.getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-						.getCellType() != CellType.BLANK) {
-					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex())
-							.getStringCellValue();
-					columnMapdata.put(columnHeaderName, cell.getStringCellValue());
-				}
-			} else if (cell.getCellType() == CellType.NUMERIC) {
-				if (sheet.getRow(sheet.getFirstRowNum())
-						.getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-						.getCellType() != CellType.BLANK) {
-					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex())
-							.getStringCellValue();
-					columnMapdata.put(columnHeaderName, NumberToTextConverter.toText(cell.getNumericCellValue()));
-				}
-			} else if (cell.getCellType() == CellType.BLANK) {
-				if (sheet.getRow(sheet.getFirstRowNum())
-						.getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-						.getCellType() != CellType.BLANK) {
-					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex())
-							.getStringCellValue();
-					columnMapdata.put(columnHeaderName, "");
-				}
-			} else if (cell.getCellType() == CellType.BOOLEAN) {
-				if (sheet.getRow(sheet.getFirstRowNum())
-						.getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-						.getCellType() != CellType.BLANK) {
-					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex())
-							.getStringCellValue();
-					columnMapdata.put(columnHeaderName, Boolean.toString(cell.getBooleanCellValue()));
-				}
-			} else if (cell.getCellType() == CellType.ERROR) {
-				if (sheet.getRow(sheet.getFirstRowNum())
-						.getCell(cell.getColumnIndex(), Row.MissingCellPolicy.CREATE_NULL_AS_BLANK)
-						.getCellType() != CellType.BLANK) {
-					String columnHeaderName = sheet.getRow(sheet.getFirstRowNum()).getCell(cell.getColumnIndex())
-							.getStringCellValue();
-					columnMapdata.put(columnHeaderName, Byte.toString(cell.getErrorCellValue()));
-				}
-			}
-		}
-		return columnMapdata;
+		return totalRow;
 	}
 	
 	}
@@ -177,3 +104,4 @@ public class ExcelReader {
 	
 	
 
+                                                                                                                                                                              
