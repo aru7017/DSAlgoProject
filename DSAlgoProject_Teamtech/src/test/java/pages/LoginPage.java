@@ -54,6 +54,11 @@ public QueuePage clickLoginBtn2() {
 	return new QueuePage(driver);
 }
 
+public ArrayPage clickLoginBtn3() {
+	driver.findElement(loginBN).click();
+	return new ArrayPage(driver);
+}
+
 
 public void getStartedbn() {
 	
