@@ -53,6 +53,11 @@ public DataStrucuturePage signIn() {
 }
 
 
+public ArrayPage clickLoginBtn3() {
+	driver.findElement(loginBN).click();
+	return new ArrayPage(driver);
+}
+
 
 public void getStartedbn() {
 	

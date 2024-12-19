@@ -21,6 +21,7 @@ import utilities.ConfigReader;
 public class Hooks {
 
 	private WebDriver driver;
+
 	public Properties configProp;
 	private DriverFactory driverFactory = new DriverFactory();
 	private static final Lock lock = new ReentrantLock();
@@ -39,6 +40,30 @@ public class Hooks {
 		driver.findElement(By.xpath("//button[text()='Get Started']")).click();
 	//	driver.get(configProp.getProperty("username"));
 	//	driver.get(configProp.getProperty("password"));
+
+	private ConfigReader configReader;
+	Properties prop;
+	
+	@Before(order = 0)
+	public void setupbrowser() throws IOException {
+		
+		configReader = new ConfigReader();
+	    prop =configReader.initializeProp();
+		
+		
+	}
+	
+	@Before(order = 1)
+	public void launchBrowser() {
+   String browserName	= prop.getProperty("browser");
+   String portalUrl = prop.getProperty("url");
+   driverFactory = new DriverFactory();
+   driver = driverFactory.initializeDriver(browserName);
+   driver.get(portalUrl); 
+   DriverFactory.getDriver().manage().window().maximize();
+
+ 
+
 	}
 
 //	@After(order = 1)
