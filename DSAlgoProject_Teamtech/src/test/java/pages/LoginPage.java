@@ -28,31 +28,30 @@ public class LoginPage {
 	public	By getStartedBn = By.xpath("//*//*[@class='btn']");
 	public	By signInLink = By.xpath("//*[@id=\"navbarCollapse\"]/div[2]/ul/a[3]");
 	
-public LoginPage(WebDriver driver ) {
-	this.driver = driver;
+	public LoginPage(WebDriver driver) {
+		this.driver = driver;
+		//PageFactory.initElements(driver, this);
 	}
-
+	
 
 public void enterDataForLogin(String username, String password) {
 	driver.findElement(userNM).sendKeys(username);
 	driver.findElement(Pwd).sendKeys(password);
 	
 }
+ 
 
-public DataStrucuturePage clickLoginBtn() {
+
+public void clickLoginBtn() {
 	driver.findElement(loginBN).click();
+	
+}
+
+public DataStrucuturePage signIn() {
+	driver.findElement(signInLink).click();
 	return new DataStrucuturePage(driver);
 }
 
-public StackPage clickLoginBtn1() {
-	driver.findElement(loginBN).click();
-	return new StackPage(driver);
-}
-
-public QueuePage clickLoginBtn2() {
-	driver.findElement(loginBN).click();
-	return new QueuePage(driver);
-}
 
 public ArrayPage clickLoginBtn3() {
 	driver.findElement(loginBN).click();
@@ -66,17 +65,24 @@ public void getStartedbn() {
 	
 }
 
-public void signIn() {
-	
-	driver.findElement(signInLink).click();
-	
+
+
+
+
+public void enterExcelDataForLogin(String sheetname, Integer rownumber) throws InvalidFormatException, IOException, OpenXML4JException {
+
+	ExcelReader reader = new ExcelReader();
+
+	List<Map<String, String>> testdata = reader.getData("src\\test\\resources\\ExcelTestData\\LoginData.xlsx", sheetname);
+
+
+	String username = testdata.get(rownumber).get("username");
+	String password = testdata.get(rownumber).get("password");
+	enterDataForLogin(username, password);
+
+
+
 }
-
-
-
-
-
-
 
 
 
