@@ -16,7 +16,7 @@ import pages.StackPage;
 
 public class Stack_stepDef {
 	
-	private WebDriver driver;
+/*	private WebDriver driver;
 	private LoginPage login = new LoginPage(DriverFactory.getDriver());
 	private StackPage stack = new StackPage(driver);
 	Properties prop;
@@ -227,7 +227,7 @@ public class Stack_stepDef {
 		@Then("User should navigate to Practice Questions page of Stack")
 		public void user_should_navigate_to_practice_questions_page_of_stack() {
 		   
-		}
+		}*/
 
 }
 

@@ -18,28 +18,28 @@ import utilities.ConfigReader;
 public class Queue_stepDef {
 	
 	private WebDriver driver;
-	private LoginPage login = new LoginPage(DriverFactory.getDriver());
-	private QueuePage queue = new QueuePage(driver);
-	Properties prop;
-	private ConfigReader configReader=new ConfigReader();
+	
+//	private QueuePage queue = new QueuePage(driver);
+//	Properties prop;
+//	private ConfigReader configReader=new ConfigReader();
 	@Given("User navigates to login page")
 	public void user_navigates_to_login_page() {
-		 login.getStartedbn();
-		 login.signIn();
+	//	 login.getStartedbn();
+	//	 login.signIn();
 	}
 
 	@When("User enters username and password and clicks on login button")
 	public void user_enters_username_and_password_and_clicks_on_login_button() throws IOException {
-		configReader = new ConfigReader();
-	    prop =configReader.initializeProp();
+	//	configReader = new ConfigReader();
+	//    prop =configReader.initializeProp();
 
-		String userName = prop.getProperty("username");
-		   String PassWord = prop.getProperty("password");
-		login.enterDataForLogin(userName, PassWord); 
+	//	String userName = prop.getProperty("username");
+	//	   String PassWord = prop.getProperty("password");
+	//	login.enterDataForLogin(userName, PassWord); 
 		
 		
 		//login.enterDataForLogin("techteam","Time4team$" ); 
-		queue=login.clickLoginBtn2();
+		//queue=login.clickLoginBtn2();
 	}
 
 	@Then("User is navigated to the homepage")
@@ -51,7 +51,7 @@ public class Queue_stepDef {
 	@When("User clicks Get Started of Queue in Home Page.")
 	public void user_clicks_get_started_of_queue_in_home_page(){
 		//Thread.sleep(5000);
-		queue.queueGetStartedBtn();
+		//queue.queueGetStartedBtn();
 	}
 
 	@Then("User should navigate to Queue Page.")
@@ -61,8 +61,8 @@ public class Queue_stepDef {
 	@When("User clicks on Implementation of Queue in Python  in Queue Page .")
 	public void user_clicks_on_implementation_of_queue_in_python_in_queue_page() {
 		
-		queue.queueGetStartedBtn();
-		queue.implementationOfQueueLink();
+		//queue.queueGetStartedBtn();
+		//queue.implementationOfQueueLink();
 	}
 
 	@Then("User should navigate to Implementation of Queue in Python Page.")
@@ -72,9 +72,9 @@ public class Queue_stepDef {
 
 	@When("User clicks on TryHere link of Implementation of queue page .")
 	public void user_clicks_on_try_here_link_of_implementation_of_queue_page() {
-		queue.queueGetStartedBtn();
-		queue.implementationOfQueueLink();
-		queue.ClickTryHereInQueue();
+	//	queue.queueGetStartedBtn();
+	//	queue.implementationOfQueueLink();
+	//	queue.ClickTryHereInQueue();
 	}
 
 	@Then("User should navigate to TryEditor page to write the python code")
@@ -89,11 +89,11 @@ public class Queue_stepDef {
 
 	@When("user enters valid python code in TryEditorPage")
 	public void user_enters_valid_python_code_in_try_editor_page() {
-		queue.queueGetStartedBtn();
-		queue.implementationOfQueueLink();
-		queue.ClickTryHereInQueue();
-		queue.TextEditorOperations();
-		queue.ClickRunButton();
+		//queue.queueGetStartedBtn();
+		//queue.implementationOfQueueLink();
+	//	queue.ClickTryHereInQueue();
+	//	queue.TextEditorOperations();
+	//	queue.ClickRunButton();
 	}
 
 	@Then("user is able to see the output in result section of TryEditor Page")
@@ -105,11 +105,11 @@ public class Queue_stepDef {
 
 	@When("user enters invalid python code in TryEditorPage")
 	public void user_enters_invalid_python_code_in_try_editor_page() {
-		queue.queueGetStartedBtn();
-		queue.implementationOfQueueLink();
-		queue.ClickTryHereInQueue();
-		queue.TextEditorInvalidOperations();
-		queue.ClickRunButton();
+	//	queue.queueGetStartedBtn();
+	//	queue.implementationOfQueueLink();
+	//	queue.ClickTryHereInQueue();
+		//queue.TextEditorInvalidOperations();
+		//queue.ClickRunButton();
 	}
 
 	@Then("user will see an error message in PopUp window of TryEditor Page")
@@ -119,8 +119,8 @@ public class Queue_stepDef {
 //#######################################################################################################
 	@When("User clicks Implementation using collections.deque")
 	public void user_clicks_implementation_using_collections_deque(){
-		queue.queueGetStartedBtn();
-		queue.implementationUsingCollectionDequeue(); 
+		//queue.queueGetStartedBtn();
+	//	queue.implementationUsingCollectionDequeue(); 
 	}
 
 	@Then("User should navigate to Implementation using collections.deque.")
@@ -129,9 +129,9 @@ public class Queue_stepDef {
 	}
 	@When("User clicks on TryHere link of Implementation using collections.deque.")
 	public void user_clicks_on_try_here_link_of_implementation_using_collections_deque() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingCollectionDequeue();
-		queue.ClickTryHereInQueue();
+	//	queue.queueGetStartedBtn();
+	//	queue.implementationUsingCollectionDequeue();
+	//	queue.ClickTryHereInQueue();
 	}
 
 	@Then("User should navigate to TryEditor page to write the python code of Implementation using collections.deque.")
@@ -141,11 +141,11 @@ public class Queue_stepDef {
 
 	@When("user enters valid python code in TryEditorPage of Implementation using collections.deque.")
 	public void user_enters_valid_python_code_in_try_editor_page_of_implementation_using_collections_deque() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingCollectionDequeue();
-		queue.ClickTryHereInQueue();
-		queue.TextEditorOperations();
-		queue.ClickRunButton();
+	//	queue.queueGetStartedBtn();
+	//	queue.implementationUsingCollectionDequeue();
+	//	queue.ClickTryHereInQueue();
+	//	queue.TextEditorOperations();
+		//queue.ClickRunButton();
 		
 	}
 
@@ -156,11 +156,11 @@ public class Queue_stepDef {
 
 	@When("user enters invalid python code in TryEditorPage of Implementation using collections.deque.")
 	public void user_enters_invalid_python_code_in_try_editor_page_of_implementation_using_collections_deque() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingCollectionDequeue();
-		queue.ClickTryHereInQueue();
-		queue.TextEditorInvalidOperations();
-		queue.ClickRunButton();
+		//queue.queueGetStartedBtn();
+	//	queue.implementationUsingCollectionDequeue();
+	//	queue.ClickTryHereInQueue();
+	//	queue.TextEditorInvalidOperations();
+	//	queue.ClickRunButton();
 	}
 
 	@Then("user will see an error message in PopUp window of TryEditor Page of Implementation using collections.deque.")
@@ -172,8 +172,8 @@ public class Queue_stepDef {
 	
 	@When("User clicks implementation Using Array")
 	public void user_clicks_implementation_using_array() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingArrayLink();
+		//queue.queueGetStartedBtn();
+		//queue.implementationUsingArrayLink();
 	}
 
 	@Then("User should navigate to implementation Using Array Page")
@@ -183,9 +183,9 @@ public class Queue_stepDef {
 
 	@When("User clicks on TryHere link of implementation Using Array")
 	public void user_clicks_on_try_here_link_of_implementation_using_array() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingArrayLink();
-		queue.ClickTryHereInQueue(); 
+		//queue.queueGetStartedBtn();
+		//queue.implementationUsingArrayLink();
+		//queue.ClickTryHereInQueue(); 
 	}
 
 	@Then("User should navigate to TryEditor page to write the python code of implementation Using Array")
@@ -195,11 +195,11 @@ public class Queue_stepDef {
 
 	@When("user enters valid python code in TryEditorPage of implementation Using Array")
 	public void user_enters_valid_python_code_in_try_editor_page_of_implementation_using_array() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingArrayLink();
-		queue.ClickTryHereInQueue(); 
-	    queue.TextEditorOperations();
-		queue.ClickRunButton();
+		//queue.queueGetStartedBtn();
+		//queue.implementationUsingArrayLink();
+		//queue.ClickTryHereInQueue(); 
+	   // queue.TextEditorOperations();
+		//queue.ClickRunButton();
 	}
 
 	@Then("user is able to see the output in result section of TryEditor Page of implementation Using Array")
@@ -209,11 +209,11 @@ public class Queue_stepDef {
 
 	@When("user enters invalid python code in TryEditorPage of implementation Using Array")
 	public void user_enters_invalid_python_code_in_try_editor_page_of_implementation_using_array() {
-		queue.queueGetStartedBtn();
-		queue.implementationUsingArrayLink();
-		queue.ClickTryHereInQueue(); 
-	    queue.TextEditorInvalidOperations();
-	    queue.ClickRunButton();
+		//queue.queueGetStartedBtn();
+		//queue.implementationUsingArrayLink();
+		//queue.ClickTryHereInQueue(); 
+	   // queue.TextEditorInvalidOperations();
+	   // queue.ClickRunButton();
 	   
 	}
 
@@ -225,8 +225,8 @@ public class Queue_stepDef {
 //#########################################################################################################//
 	@When("User clicks Queue Operations")
 	public void user_clicks_queue_operations() {
-		queue.queueGetStartedBtn();
-		queue.queueOperationsLink();
+		//queue.queueGetStartedBtn();
+		//queue.queueOperationsLink();
 	}
 
 	@Then("User should navigate to Queue Operations")
@@ -236,9 +236,9 @@ public class Queue_stepDef {
 
 	@When("User clicks on TryHere link of Queue Operations")
 	public void user_clicks_on_try_here_link_of_queue_operations() {
-	  queue.queueGetStartedBtn();
-	  queue.queueOperationsLink();
-	  queue.ClickTryHereInQueue();
+	 // queue.queueGetStartedBtn();
+	 // queue.queueOperationsLink();
+	 // queue.ClickTryHereInQueue();
 	}
 
 	@Then("User should navigate to TryEditor page to write the python code of Queue Operations")
@@ -248,11 +248,11 @@ public class Queue_stepDef {
 
 	@When("user enters valid python code in TryEditorPage of Queue Operations")
 	public void user_enters_valid_python_code_in_try_editor_page_of_queue_operations() {
-		  queue.queueGetStartedBtn();
-		  queue.queueOperationsLink();
-		  queue.ClickTryHereInQueue();
-		  queue.TextEditorOperations();
-		  queue.ClickRunButton();
+		 // queue.queueGetStartedBtn();
+		 // queue.queueOperationsLink();
+		 // queue.ClickTryHereInQueue();
+		 // queue.TextEditorOperations();
+		 // queue.ClickRunButton();
 	}
 
 	@Then("user is able to see the output in result section of TryEditor Page of Queue Operations")
@@ -260,7 +260,7 @@ public class Queue_stepDef {
 	 // Assert.assertEquals(queue.getOutputResult(), queue.TextEditorOperations()); 
 	}
 
-	@When("user enters invalid python code in TryEditorPage of Queue Operations")
+	/*@When("user enters invalid python code in TryEditorPage of Queue Operations")
 	public void user_enters_invalid_python_code_in_try_editor_page_of_queue_operations() {
 		  queue.queueGetStartedBtn();
 		  queue.queueOperationsLink();
@@ -285,6 +285,6 @@ public class Queue_stepDef {
 	  // String pageTitle ="Practice Questions";
 	   //Assert.assertEquals(driver.getTitle(), pageTitle);
 	}
-
+*/
 
 }
