@@ -34,7 +34,7 @@ public class Hooks {
 		driver = driverFactory.getDriver();  
 		lock.unlock(); 
 		driver.manage().window().maximize();
-		driver.get(configProp.getProperty("url"));
+		driver.get(configProp.getProperty("url")); 
 		System.out.println("URL :>>>"+configProp.getProperty("url"));
 		driver.findElement(By.xpath("//button[text()='Get Started']")).click();
 	//	driver.get(configProp.getProperty("username"));
