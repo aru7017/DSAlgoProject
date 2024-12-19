@@ -33,7 +33,7 @@ public class DriverFactory {
             String browser = configProp.getProperty("browser"); // Default to Chrome if no property is set
             System.out.println("Browser Value :>>>"+browser);
             if (browser == null) {
-                browser = "chrome"; 
+                browser = "chrome";  
             } 
             switch (browser.toLowerCase()) {   
                 case "firefox":

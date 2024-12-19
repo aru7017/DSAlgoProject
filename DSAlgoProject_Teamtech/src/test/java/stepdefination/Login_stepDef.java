@@ -62,7 +62,7 @@ public void user_enters_only_username_field() {
 	login.clickLoginBtn();
 }
 
-@Then("user checks all empty fields")
+@Then("user checks all empty fields") 
 public void user_checks_all_empty_fields() {
 	login.clickLoginBtn();
 }
